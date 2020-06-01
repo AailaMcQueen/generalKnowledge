@@ -29,13 +29,18 @@ body{
 }
 
 .questionCard{
+    margin-top: 16vh;
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
     flex-grow: 1;
 }
 
-.nav{
+.questionCard .question{
+    padding-bottom: 20px;
+}
+
+.navbar{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -53,7 +58,6 @@ body{
       -ms-flex-preferred-size: 20%;
           flex-basis: 20%;
       height: 14vh;
-      background-color: white;
       z-index: 9999;
   }
 
@@ -77,6 +81,12 @@ ol{
 
 ol li{
     flex-grow: 1;
+    border-radius: 4px;
+    border-color: white;
+    border-width: 2px;
+    border-style: solid;
+    padding: 10px;
+    margin: 5px;
 }
 
 .medium{
