@@ -5,6 +5,7 @@
 
 body{
     background-color: black;
+    color: white;
 }
 
 .buttonRefresh{
@@ -12,8 +13,80 @@ body{
     border: white 1px;
     color: white;
     width: 100px;
+    padding: 20px;
 }
 
 .buttonRefresh:hover{
     background-color: darkblue;
+}
+
+.questionContainer{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    width: 80%;
+    margin-left: 5vh;
+}
+
+.questionCard{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex-grow: 1;
+}
+
+.nav{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+    position: fixed;
+    -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+              flex-direction: row;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -ms-flex-preferred-size: 20%;
+          flex-basis: 20%;
+      height: 14vh;
+      background-color: white;
+      z-index: 9999;
+  }
+
+  .scoreCard{
+    padding-top: 10px;
+    text-align: right;
+    padding-right: 30px;
+    color: white;
+    background-color:black;
+    -webkit-box-flex: 0.8;
+        -ms-flex-positive: 0.8;
+            flex-grow: 0.8;
+  }
+
+ol{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding-left: 14px;
+}
+
+ol li{
+    flex-grow: 1;
+}
+
+.medium{
+    color: orange;
+}
+
+.easy {
+    color: greenyellow;
+}
+
+.hard{
+    color: red;
 }
