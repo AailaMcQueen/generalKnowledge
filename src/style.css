@@ -119,6 +119,13 @@ ol li:hover{
     cursor: pointer;
 }
 
+.tags{
+    padding: 10px;
+    padding-top: 20px;
+    line-height: 1.7em;
+    font-size: 28px;
+}
+
 
 @media screen and (max-width: 600px){
     .question h2{
@@ -138,6 +145,10 @@ ol li:hover{
     .navbar .buttonRefresh{
         font-size: smaller;
     }
+
+    .tags{
+        font-size: 19px;
+    }
 }
 
 @media screen and (max-width: 350px){
@@ -147,4 +158,13 @@ ol li:hover{
     .navbar .buttonRefresh{
         font-size: x-small;
     }
+    .tags{
+        font-size: 16px;
+    }
+}
+
+.buttonRefresh:hover{
+    cursor: pointer;
+    font-size: 1.01em;
+    transition: ease-in-out 0.5s;
 }
