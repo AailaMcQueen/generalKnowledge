@@ -9,15 +9,14 @@ body{
 }
 
 .buttonRefresh{
-    background-color: black;
-    border: white 1px;
-    color: white;
     width: 100px;
     padding: 20px;
-}
-
-.buttonRefresh:hover{
-    background-color: darkblue;
+    height: 100%;
+    font-size: 20px;
+    background-color: teal;
+    outline: none;
+    border: none;
+    color: white;
 }
 
 .questionContainer{
@@ -38,15 +37,17 @@ body{
 
 .questionCard .question{
     padding-bottom: 20px;
+    font-size: 28px;
 }
 
 .navbar{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    background-color: teal;
     width: 100%;
     -ms-flex-preferred-size: 100%;
-        flex-basis: 100%;
+        flex-basis: 30%;
     position: fixed;
     -webkit-box-orient: horizontal;
       -webkit-box-direction: normal;
@@ -57,19 +58,21 @@ body{
               justify-content: space-between;
       -ms-flex-preferred-size: 20%;
           flex-basis: 20%;
-      height: 14vh;
+      height: 9vh;
       z-index: 9999;
+  }
+
+  .navbar .timer{
+      padding: 10px;
   }
 
   .scoreCard{
     padding-top: 10px;
     text-align: right;
     padding-right: 30px;
-    color: white;
-    background-color:black;
-    -webkit-box-flex: 0.8;
-        -ms-flex-positive: 0.8;
-            flex-grow: 0.8;
+    -webkit-box-flex: 0.4;
+        -ms-flex-positive: 0.4;
+            flex-grow: 0.4;
   }
 
 ol{
@@ -87,6 +90,7 @@ ol li{
     border-style: solid;
     padding: 10px;
     margin: 5px;
+    font-size: 22px;
 }
 
 .medium{
@@ -99,4 +103,31 @@ ol li{
 
 .hard{
     color: red;
+}
+
+ol li:hover{
+    font-size: 26px;
+    background-color: orange;
+    border-color: orange;
+    transition: ease-in-out;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 600px){
+    .question h2{
+        font-size: 24px;
+    }
+
+    ol li{
+        font-size: 16px;
+    }
+    ol li:hover{
+        font-size: 20px;
+    }
+
+    .navbar{
+        font-size: smaller;
+    }
 }
