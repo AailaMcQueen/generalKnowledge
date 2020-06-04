@@ -7,30 +7,29 @@ var timerY = document.querySelector(".timer");
 var seconds = 45;
 
 buttonRefresh.addEventListener("click", function(){
-    questionArray.splice(0, questionArray.length);
-    for(var i=0;i<7;i++){
-        fetch(url)
-        .then(function(request){
-            if(!request.ok){
-                throw Error(request.status);
-            }
-            return request.json();
-        })
-        .then(function(response){
-            var data = response.results[0];
-            questionArray.push(data);
-        })
-        .catch(function(error){
-            alert(error);
-        });
-    }
+    fetch(url)
+    .then(function(request){
+        if(!request.ok){
+            throw Error(request.status);
+        }
+        return request.json();
+    })
+    .then(function(response){
+        var data = response.results[0];
+        console.log(data);
+    })
+    .catch(function(error){
+        alert(error);
+    });
 });
 
 function questionUpdate(question){
-    console.log("Hello");
+    
 }
 
-var clockTimer = setInterval(timerFunction, 1000);
+var clockTimer;
+
+clockTimer = setInterval(timerFunction, 1000);
 
 function timerFunction(){
     seconds--;
