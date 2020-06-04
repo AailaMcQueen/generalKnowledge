@@ -4,9 +4,22 @@ var questionArray = [];
 var questionDiv = document.querySelectorAll(".questionCard");
 var timerX = document.querySelector(".seconds");
 var timerY = document.querySelector(".timer");
+var question = document.querySelector(".question");
+var option1 = document.querySelector("#option1");
+var option2 = document.querySelector("#option2");
+var option3 = document.querySelector("#option3");
+var option4 = document.querySelector("#option4");
+var difficulty = document.querySelector(".difficulty");
 var seconds = 45;
+var diff = "medium";
+var totalQuestions = 1;
+var clockTimer;
 
 buttonRefresh.addEventListener("click", function(){
+    questionUpdate();
+});
+
+function questionDataInput(){
     fetch(url)
     .then(function(request){
         if(!request.ok){
@@ -16,18 +29,21 @@ buttonRefresh.addEventListener("click", function(){
     })
     .then(function(response){
         var data = response.results[0];
-        console.log(data);
+        console.log("Hello");
     })
     .catch(function(error){
         alert(error);
     });
-});
-
-function questionUpdate(question){
-    
 }
 
-var clockTimer;
+
+function questionUpdate(){
+    $(".questionContainer").slideUp(1000);
+    $(".difficulty").removeClass();
+    questionDataInput();
+    $(".questionContainer").slideDown(1000);
+    totalQuestions++;
+}
 
 clockTimer = setInterval(timerFunction, 1000);
 
@@ -44,5 +60,6 @@ function timerFunction(){
     if(seconds==0){
         timerY.style.webkitAnimationPlayState = "paused";
         clearInterval(clockTimer);
+        questionUpdate();
     }
 }
