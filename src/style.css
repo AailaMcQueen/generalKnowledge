@@ -66,9 +66,11 @@ body{
       text-align: center;
   }
 
-  .navbar .timer{
+  .timer{
       padding: 10px;
       padding-top: 11px;
+      animation: myAnimation 1s ease-in infinite;
+      animation-play-state: paused;
   }
 
   .scoreCard{
@@ -148,6 +150,20 @@ ol li:hover{
 
     .tags{
         font-size: 19px;
+    }
+}
+
+@keyframes myAnimation{
+    0% {
+        color: white;
+    }
+    50%{
+        color: red;
+        font-size: 1.07em;
+    }
+    100%{
+        color: white;
+        font-size: 1em;
     }
 }
 
