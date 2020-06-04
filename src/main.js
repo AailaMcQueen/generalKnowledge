@@ -13,18 +13,33 @@ var difficulty = document.querySelector(".difficulty");
 var category = document.querySelector(".category");
 var correctAnswer = "option";
 var random;
-var seconds = 45;
+var seconds = 5;
 var diff = "medium";
 var totalQuestions = 1;
 var correctAnswers = 0;
+var clickedAnswer = 2;
 var clockTimer;
+var answer = 1;
 
-buttonRefresh.addEventListener("click", function(){
-    clearInterval(clockTimer);
-    questionUpdate();
-});
+function correctAnswerF(){
+    var str = "#option"+answer;
+    $(str).css("background-color", "#138c0a");
+    $(str).css("border-color", "#138c0a");
+}
+
+function wrongAnswerF(str){
+    $(str).css("background-color", "red");
+    $(str).css("border-color", "red");
+}
+
 
 function questionDataInput(){
+    var str1 = "#option"+answer;
+    var str2 = "#option"+clickedAnswer;
+    $(str1).css("background-color", "black");
+    $(str1).css("border-color", "white");
+    $(str2).css("background-color", "black");
+    $(str2).css("border-color", "white");
     fetch(url)
     .then(function(request){
         if(!request.ok){
@@ -34,24 +49,13 @@ function questionDataInput(){
     })
     .then(function(response){
         var data = response.results[0];
-        console.log("Hello");
+        
     })
     .catch(function(error){
         alert(error);
     });
 }
 
-
-function questionUpdate(){
-    showCorrectAnswer();
-    setTimeout(function(){
-        $(".questionContainer").slideUp(1000);
-        $(".difficulty").removeClass();
-        questionDataInput();
-        $(".questionContainer").slideDown(1000);
-        totalQuestions++;
-    }, 5000);
-}
 
 clockTimer = setInterval(timerFunction, 1000);
 
@@ -71,3 +75,24 @@ function timerFunction(){
         questionUpdate();
     }
 }
+
+function questionUpdate(){
+    wrongAnswerF("#option2");
+    correctAnswerF();
+    setTimeout(function(){
+        $(".questionContainer").slideUp(1000);
+        setTimeout(function(){
+            $(".difficulty").removeClass();
+            questionDataInput();
+            $(".questionContainer").slideDown(1000);
+            totalQuestions++;
+            seconds = 6;
+            clockTimer = setInterval(timerFunction, 1000);
+        }, 1000);
+    }, 5000);
+}
+
+buttonRefresh.addEventListener("click", function(){
+    clearInterval(clockTimer);
+    questionUpdate();
+});
