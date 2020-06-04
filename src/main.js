@@ -10,12 +10,17 @@ var option2 = document.querySelector("#option2");
 var option3 = document.querySelector("#option3");
 var option4 = document.querySelector("#option4");
 var difficulty = document.querySelector(".difficulty");
+var category = document.querySelector(".category");
+var correctAnswer = "option";
+var random;
 var seconds = 45;
 var diff = "medium";
 var totalQuestions = 1;
+var correctAnswers = 0;
 var clockTimer;
 
 buttonRefresh.addEventListener("click", function(){
+    clearInterval(clockTimer);
     questionUpdate();
 });
 
@@ -38,11 +43,14 @@ function questionDataInput(){
 
 
 function questionUpdate(){
-    $(".questionContainer").slideUp(1000);
-    $(".difficulty").removeClass();
-    questionDataInput();
-    $(".questionContainer").slideDown(1000);
-    totalQuestions++;
+    showCorrectAnswer();
+    setTimeout(function(){
+        $(".questionContainer").slideUp(1000);
+        $(".difficulty").removeClass();
+        questionDataInput();
+        $(".questionContainer").slideDown(1000);
+        totalQuestions++;
+    }, 5000);
 }
 
 clockTimer = setInterval(timerFunction, 1000);
