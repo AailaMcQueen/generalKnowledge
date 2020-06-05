@@ -15,21 +15,26 @@ var correctAnswer = "option";
 var random;
 var seconds = 45;
 var diff = "medium";
-var totalQuestions = 1;
+var totalQuestions = 0;
 var correctAnswers = 0;
-var clickedAnswer = 2;
+var clickedAnswer = -1;
 var clockTimer;
 var answer = 0;
 var data = {};
 
-//$(".questionContainer").slideUp(100);
-//initiate();
+$(".questionContainer").css("display", "none");
+initiate();
 
 function initiate(){
     fetchData();
-    dataInput();
-    $(".questionContainer").slideDown(1000);
-    clockTimer = setInterval(timerFunction, 1000);
+    setTimeout(function(){
+        questionDataInput();
+        $(".questionContainer").slideDown(1000);
+        totalQuestions++;
+        clearInterval(clockTimer);
+        seconds = 46;
+        clockTimer = setInterval(timerFunction, 1000);
+    }, 3000);
 }
 
 function correctAnswerF(){
@@ -74,19 +79,18 @@ function dataInput(){
     random = Math.floor(random);
     random = random%4;
     answer = random;
-    var strup = "#option";
     category.innerHTML = data.category;
     question.innerHTML = "<h2>"+data.question+"</h2>";
     diff = data.difficulty;
     difficulty.innerHTML = diff;
     $(".difficulty").addClass(diff);
-    $(strup+random).html(data.correct_answer);
+    $("#option"+random).html(data.correct_answer);
     random = (random+1)%4;
-    $(strup+random).html(data.incorrect_answers[0]);
+    $("#option"+random).html(data.incorrect_answers[0]);
     random = (random+1)%4;
-    $(strup+random).html(data.incorrect_answers[1]);
+    $("#option"+random).html(data.incorrect_answers[1]);
     random = (random+1)%4;
-    $(strup+random).html(data.incorrect_answers[2]);
+    $("#option"+random).html(data.incorrect_answers[2]);
 }
 
 
@@ -97,18 +101,18 @@ function timerFunction(){
         timerX.innerHTML = seconds;
     }
     else{
-        timerY.style.webkitAnimationPlayState = "running";
+        $(".timer").css("color", "red");
         timerX.innerHTML = x + seconds;
     }
     if(seconds==0){
-        timerY.style.webkitAnimationPlayState = "paused";
+        $(".timer").removeAttr("style");
         clearInterval(clockTimer);
+        correctAnswerF();
         questionUpdate();
     }
 }
 
 function questionUpdate(){
-    correctAnswerF();
     fetchData();
     setTimeout(function(){
         $(".questionContainer").slideUp(1000);
@@ -125,6 +129,7 @@ function questionUpdate(){
 }
 
 buttonRefresh.addEventListener("click", function(){
+    correctAnswerF();
     questionUpdate();
 });
 

@@ -69,8 +69,6 @@ body{
   .timer{
       padding: 10px;
       padding-top: 11px;
-      animation: myAnimation 1s ease-in infinite;
-      animation-play-state: paused;
   }
 
   .scoreCard{
@@ -130,7 +128,6 @@ ol li:hover{
     line-height: 1.7em;
     font-size: 28px;
 }
-
 
 @media screen and (max-width: 600px){
     .question h2{
