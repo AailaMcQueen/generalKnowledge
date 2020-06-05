@@ -102,14 +102,17 @@ ol li{
 
 .medium{
     color: orange;
+    text-transform: capitalize;
 }
 
 .easy {
     color: greenyellow;
+    text-transform: capitalize;
 }
 
 .hard{
     color: red;
+    text-transform: capitalize;
 }
 
 ol li:hover{
