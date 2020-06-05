@@ -20,7 +20,17 @@ var correctAnswers = 0;
 var clickedAnswer = 2;
 var clockTimer;
 var answer = 0;
-var data;
+var data = {};
+
+//$(".questionContainer").slideUp(100);
+//initiate();
+
+function initiate(){
+    fetchData();
+    dataInput();
+    $(".questionContainer").slideDown(1000);
+    clockTimer = setInterval(timerFunction, 1000);
+}
 
 function correctAnswerF(){
     var str = "#option"+answer;
@@ -37,10 +47,8 @@ function wrongAnswerF(str){
 function questionDataInput(){
     var str1 = "#option"+answer;
     var str2 = "#option"+clickedAnswer;
-    $(str1).css("background-color", "black");
-    $(str1).css("border-color", "white");
-    $(str2).css("background-color", "black");
-    $(str2).css("border-color", "white");
+    $(str1).removeAttr('style');
+    $(str2).removeAttr('style');
     dataInput();
 }
 
@@ -82,8 +90,6 @@ function dataInput(){
 }
 
 
-clockTimer = setInterval(timerFunction, 1000);
-
 function timerFunction(){
     seconds--;
     var x = "0";
@@ -111,6 +117,7 @@ function questionUpdate(){
             questionDataInput();
             $(".questionContainer").slideDown(1000);
             totalQuestions++;
+            clearInterval(clockTimer);
             seconds = 46;
             clockTimer = setInterval(timerFunction, 1000);
         }, 1500);
@@ -118,7 +125,6 @@ function questionUpdate(){
 }
 
 buttonRefresh.addEventListener("click", function(){
-    clearInterval(clockTimer);
     questionUpdate();
 });
 
