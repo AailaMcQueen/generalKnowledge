@@ -114,6 +114,7 @@ function timerFunction(){
 
 function questionUpdate(){
     fetchData();
+    clearInterval(clockTimer);
     setTimeout(function(){
         $(".questionContainer").slideUp(1000);
         setTimeout(function(){
@@ -121,7 +122,6 @@ function questionUpdate(){
             questionDataInput();
             $(".questionContainer").slideDown(1000);
             totalQuestions++;
-            clearInterval(clockTimer);
             seconds = 46;
             clockTimer = setInterval(timerFunction, 1000);
         }, 1500);

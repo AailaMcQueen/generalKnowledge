@@ -62,6 +62,12 @@ body{
       z-index: 9999;
   }
 
+  .navbar div h1{
+      display: inline-flex;
+      vertical-align: middle;
+      line-height: 1;
+  }
+
   .skipQuestion{
       text-align: center;
   }
@@ -121,6 +127,7 @@ ol li:hover{
     transition-duration: 0.5s;
     cursor: pointer;
 }
+
 
 .tags{
     padding: 10px;
