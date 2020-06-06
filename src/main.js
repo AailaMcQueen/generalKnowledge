@@ -133,85 +133,79 @@ function questionUpdate(){
 
 buttonRefresh.addEventListener("click", function(){
     correctAnswerF();
-    questionUpdate();
+    if(totalQuestions <= 30){
+        questionUpdate();
+    }
 });
 
 option1.addEventListener("click", function(){
     if(seconds>0){
-        clickedAnswer==0;
-        if(answer==0){
-            seconds = 0;
-            clearInterval(clockTimer);
-            correctAnswerF();
-            correctAnswers++;
+        clickedAnswer =0;
+        clearInterval(clockTimer);
+        seconds = 0;
+        if(totalQuestions <= 30){
             questionUpdate();
         }
+        correctAnswerF();
+        if(answer==0){
+            correctAnswers++;
+        }
         else{
-            seconds = 0;
-            clearInterval(clockTimer);
             wrongAnswerF("#option0");
-            correctAnswerF();
-            questionUpdate();
         }
     }
 })
 
 option2.addEventListener("click", function(){
     if(seconds>0){
-        clickedAnswer==1;
-        if(answer==1){
-            seconds = 0;
-            clearInterval(clockTimer);
-            correctAnswerF();
-            correctAnswers++;
+        clickedAnswer =1;
+        clearInterval(clockTimer);
+        seconds = 0;
+        correctAnswerF();
+        if(totalQuestions <= 30){
             questionUpdate();
         }
+        if(answer==1){
+            correctAnswers++;
+        }
         else{
-            seconds = 0;
-            clearInterval(clockTimer);
             wrongAnswerF("#option1");
-            correctAnswerF();
-            questionUpdate();
         }
     }
 })
 
 option3.addEventListener("click", function(){
     if(seconds>0){
-        clickedAnswer==2;
-        if(answer==2){
-            seconds = 0;
-            clearInterval(clockTimer);
-            correctAnswerF();
-            correctAnswers++;
+        clickedAnswer =2;
+        clearInterval(clockTimer);
+        seconds = 0;
+        if(totalQuestions <= 30){
             questionUpdate();
         }
+        correctAnswerF();
+        if(answer==2){
+            correctAnswers++;
+        }
         else{
-            seconds = 0;
-            clearInterval(clockTimer);
             wrongAnswerF("#option2");
-            correctAnswerF();
-            questionUpdate();
         }
     }
 })
 
 option4.addEventListener("click", function(){
     if(seconds>0){
-        clickedAnswer==3;
-        if(answer==3){
-            seconds = 0;
-            clearInterval(clockTimer);
-            correctAnswerF();
-            correctAnswers++;
+        clickedAnswer =3;
+        clearInterval(clockTimer);
+        seconds = 0;
+        correctAnswerF();
+        if(totalQuestions <= 30){
             questionUpdate();
         }
+        if(answer==3){
+            correctAnswers++;
+        }
         else{
-            seconds = 0;
-            clearInterval(clockTimer);
             wrongAnswerF("#option3");
-            correctAnswerF();
-            questionUpdate();
         }
     }
 })
