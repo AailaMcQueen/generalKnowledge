@@ -165,6 +165,29 @@ ol li:hover{
     font-size: 28px;
 }
 
+.chart{
+    padding-top: 15vh;
+    display: flex;
+    background-color: inherit;
+    justify-content: space-around;
+}
+
+.chart .h1{
+    padding-bottom: 20px;
+    color: teal;
+    text-decoration: underline;
+}
+
+.chart li {
+    font-size: 1.1em;
+    padding: 10px;
+    font-weight: 800;
+}
+
+#piechart:hover{
+    cursor: pointer;
+}
+
 @media screen and (max-width: 600px){
     .question h2{
         font-size: 24px;
@@ -186,6 +209,11 @@ ol li:hover{
 
     .tags{
         font-size: 19px;
+    }
+
+    .chart{
+        margin-left: 25px;
+        flex-direction: column;
     }
 }
 

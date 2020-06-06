@@ -15,15 +15,17 @@ var correctAnswer = "option";
 var random;
 var seconds = 45;
 var diff = "medium";
-var totalQuestions = 0;
-var correctAnswers = 0;
+var totalQuestions = 10;
+var correctAnswers = 5;
 var clickedAnswer = -1;
+var skippedQuestions = 3;
+var wrongAnswers = 2;
 var clockTimer;
 var answer = 0;
 var data = {};
 
 $(".questionContainer").css("display", "none");
-initiate();
+//initiate();
 
 function initiate(){
     fetchData();
@@ -44,6 +46,7 @@ function correctAnswerF(){
 }
 
 function wrongAnswerF(str){
+    wrongAnswerF++;
     $(str).css("background-color", "red");
     $(str).css("border-color", "red");
 }
@@ -109,6 +112,7 @@ function timerFunction(){
         clearInterval(clockTimer);
         correctAnswerF();
         if(totalQuestions <= 30){
+            skippedQuestions++;
             questionUpdate();
         }
     }
@@ -134,6 +138,7 @@ function questionUpdate(){
 buttonRefresh.addEventListener("click", function(){
     correctAnswerF();
     if(totalQuestions <= 30){
+        skippedQuestions++;
         questionUpdate();
     }
 });
@@ -209,3 +214,30 @@ option4.addEventListener("click", function(){
         }
     }
 })
+
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Questions', 'Count'],
+  ['Correct Answers', correctAnswers],
+  ['Unanswered', skippedQuestions],
+  ['Wrong Answers', wrongAnswers]
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = { 
+      'width':400, 
+      'height':400,
+      'colors':["green", "orange", "red"],
+      'is3D': true,
+      'backgroundColor': { 'fill': "#000" },
+      'legend': 'none'
+    };
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
