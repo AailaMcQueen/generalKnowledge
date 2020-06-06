@@ -15,17 +15,16 @@ var correctAnswer = "option";
 var random;
 var seconds = 45;
 var diff = "medium";
-var totalQuestions = 10;
-var correctAnswers = 5;
+var totalQuestions = 0;
+var correctAnswers = 0;
 var clickedAnswer = -1;
-var skippedQuestions = 3;
-var wrongAnswers = 2;
+var skippedQuestions = 0;
+var wrongAnswers = 0;
 var clockTimer;
 var answer = 0;
 var data = {};
 
-$(".questionContainer").css("display", "none");
-//initiate();
+initiate();
 
 function initiate(){
     fetchData();
@@ -46,7 +45,7 @@ function correctAnswerF(){
 }
 
 function wrongAnswerF(str){
-    wrongAnswerF++;
+    wrongAnswers++;
     $(str).css("background-color", "red");
     $(str).css("border-color", "red");
 }
@@ -111,7 +110,7 @@ function timerFunction(){
         $(".timer").removeAttr("style");
         clearInterval(clockTimer);
         correctAnswerF();
-        if(totalQuestions <= 30){
+        if(totalQuestions < 30){
             skippedQuestions++;
             questionUpdate();
         }
@@ -137,7 +136,7 @@ function questionUpdate(){
 
 buttonRefresh.addEventListener("click", function(){
     correctAnswerF();
-    if(totalQuestions <= 30){
+    if(totalQuestions < 30){
         skippedQuestions++;
         questionUpdate();
     }
@@ -148,7 +147,7 @@ option1.addEventListener("click", function(){
         clickedAnswer =0;
         clearInterval(clockTimer);
         seconds = 0;
-        if(totalQuestions <= 30){
+        if(totalQuestions < 30){
             questionUpdate();
         }
         correctAnswerF();
@@ -167,7 +166,7 @@ option2.addEventListener("click", function(){
         clearInterval(clockTimer);
         seconds = 0;
         correctAnswerF();
-        if(totalQuestions <= 30){
+        if(totalQuestions < 30){
             questionUpdate();
         }
         if(answer==1){
@@ -184,7 +183,7 @@ option3.addEventListener("click", function(){
         clickedAnswer =2;
         clearInterval(clockTimer);
         seconds = 0;
-        if(totalQuestions <= 30){
+        if(totalQuestions < 30){
             questionUpdate();
         }
         correctAnswerF();
@@ -203,7 +202,7 @@ option4.addEventListener("click", function(){
         clearInterval(clockTimer);
         seconds = 0;
         correctAnswerF();
-        if(totalQuestions <= 30){
+        if(totalQuestions < 30){
             questionUpdate();
         }
         if(answer==3){
@@ -216,18 +215,18 @@ option4.addEventListener("click", function(){
 })
 
 
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+function showChart(){
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+}
 
 function drawChart() {
   var data = google.visualization.arrayToDataTable([
-  ['Questions', 'Count'],
-  ['Correct Answers', correctAnswers],
-  ['Unanswered', skippedQuestions],
-  ['Wrong Answers', wrongAnswers]
-]);
-
-  // Optional; add a title and set the width and height of the chart
+        ['Questions', 'Count'],
+        ['Correct Answers', correctAnswers],
+        ['Unanswered', skippedQuestions],
+        ['Wrong Answers', wrongAnswers]
+    ]);
   var options = { 
       'width':400, 
       'height':400,

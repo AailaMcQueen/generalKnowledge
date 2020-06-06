@@ -178,6 +178,26 @@ ol li:hover{
     text-decoration: underline;
 }
 
+.stopButton{
+    width: 100%;
+    padding: 10px;
+}
+.stopButton button{
+    padding: 10px;
+    background-color: black;
+    color: red;
+    outline: none;
+    border: none;
+    font-size: 1.5em;
+    display: inline-flex;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+.stopButton button:hover{
+    cursor: pointer;
+}
+
 .chart li {
     font-size: 1.1em;
     padding: 10px;
