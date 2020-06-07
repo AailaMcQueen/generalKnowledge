@@ -16,7 +16,12 @@
             <h1><ion-icon name="alarm-outline"></ion-icon>&nbsp;00:<span class="seconds">45</span></h1>
         </div>
         <div class="skipQuestion">
-            <button class="buttonRefresh"><h1><ion-icon name="play-forward-outline"></ion-icon>&nbsp;<span class="refresh">Skip</span></h1></button>
+            <button class="buttonRefresh">
+                <h1 class="skipping">
+                    <ion-icon class="1" name="refresh-outline" style="display: none;"></ion-icon>
+                    <ion-icon class="2" name="play-forward-outline"></ion-icon>&nbsp;<span class="refresh">Skip</span>
+                </h1>
+            </button>
         </div>
         <div class="scoreCard">
             <h1>Your Score: &nbsp;<strong class="score">0</strong></h1>

@@ -95,6 +95,12 @@ function dataInput(){
     $("#option"+random).html(data.incorrect_answers[2]);
 }
 
+$(".stopButton button").click(function(){
+    if(seconds > 0){
+        skippedQuestions = skippedQuestions + 31 - totalQuestions;
+    }
+    results();
+})
 
 function timerFunction(){
     seconds--;
@@ -113,7 +119,7 @@ function timerFunction(){
         if(totalQuestions==5){
             skippedQuestions++;
         }
-        if(totalQuestions < 5){
+        if(totalQuestions < 30){
             skippedQuestions++;
             questionUpdate();
         }
@@ -125,6 +131,7 @@ function timerFunction(){
 
 function questionUpdate(){
     fetchData();
+    $(".score").html(correctAnswers);
     clearInterval(clockTimer);
     setTimeout(function(){
         $(".questionContainer").slideUp(1000);
@@ -141,15 +148,28 @@ function questionUpdate(){
 
 buttonRefresh.addEventListener("click", function(){
     correctAnswerF();
-    if(totalQuestions==5){
+    if(totalQuestions==30){
         skippedQuestions++;
     }
-    if(totalQuestions < 5){
+    if(totalQuestions < 30){
         skippedQuestions++;
         questionUpdate();
     }
-    else{
-        results();
+    if(skippedQuestions+wrongAnswers+correctAnswers >= 30){
+        totalQuestions = 0;
+        skippedQuestions = 0;
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        $(".score").html(correctAnswers);
+        setTimeout(function(){
+            $(".chart").slideUp(1000);
+            setTimeout(function(){
+                $(".refresh").html("Skip");
+                $(".2").removeAttr("style");
+                $(".1").css("display", "none");
+            }, 1000);
+            initiate();
+        }, 3000);
     }
 });
 
@@ -165,7 +185,7 @@ option1.addEventListener("click", function(){
         else{
             wrongAnswerF("#option0");
         }
-        if(totalQuestions < 5){
+        if(totalQuestions < 30){
             questionUpdate();
         }
         else{
@@ -186,7 +206,7 @@ option2.addEventListener("click", function(){
         else{
             wrongAnswerF("#option1");
         }
-        if(totalQuestions < 5){
+        if(totalQuestions < 30){
             questionUpdate();
         }
         else{
@@ -207,7 +227,7 @@ option3.addEventListener("click", function(){
         else{
             wrongAnswerF("#option2");
         }
-        if(totalQuestions < 5){
+        if(totalQuestions < 30){
             questionUpdate();
         }
         else{
@@ -228,7 +248,7 @@ option4.addEventListener("click", function(){
         else{
             wrongAnswerF("#option3");
         }
-        if(totalQuestions < 5){
+        if(totalQuestions < 30){
             questionUpdate();
         }
         else{
@@ -239,6 +259,7 @@ option4.addEventListener("click", function(){
 
 
 function results(){
+    totalQuestions = 30;
     seconds = 0;
     timerX.innerHTML = "00";
     $(".score").html(correctAnswers);
@@ -249,6 +270,9 @@ function results(){
     setTimeout(function(){
         $(".questionContainer").slideUp(1000);
         setTimeout(function(){
+            $(".refresh").html("Restart");
+            $(".1").removeAttr("style");
+            $(".2").css("display", "none");
             $(".chart").slideDown(1000);
         }, 1000);
     }, 3000);
