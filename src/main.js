@@ -15,11 +15,11 @@ var correctAnswer = "option";
 var random;
 var seconds = 45;
 var diff = "medium";
-var totalQuestions = 0;
-var correctAnswers = 0;
+var totalQuestions = 10;
+var correctAnswers = 4;
 var clickedAnswer = -1;
-var skippedQuestions = 0;
-var wrongAnswers = 0;
+var skippedQuestions = 2;
+var wrongAnswers = 4;
 var clockTimer;
 var answer = 0;
 var data = {};
@@ -119,7 +119,6 @@ function timerFunction(){
 
 function questionUpdate(){
     fetchData();
-    $(".score").html(correctAnswers);
     clearInterval(clockTimer);
     setTimeout(function(){
         $(".questionContainer").slideUp(1000);
@@ -213,6 +212,21 @@ option4.addEventListener("click", function(){
         }
     }
 })
+
+
+function results(){
+    seconds = 0;
+    timerX.innerHTML = "00";
+    $(".score").html(correctAnswers);
+    $(".unanswered").html(skippedQuestions);
+    $(".wrongAnswers").html(wrongAnswers);
+    clearInterval(clockTimer);
+    showChart();
+    $(".questionContainer").slideUp(1000);
+    setTimeout(function(){
+        $(".chart").slideDown(1000);
+    }, 1000);
+}
 
 
 function showChart(){
