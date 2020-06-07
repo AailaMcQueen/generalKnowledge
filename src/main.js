@@ -15,11 +15,11 @@ var correctAnswer = "option";
 var random;
 var seconds = 45;
 var diff = "medium";
-var totalQuestions = 10;
-var correctAnswers = 4;
+var totalQuestions = 0;
+var correctAnswers = 0;
 var clickedAnswer = -1;
-var skippedQuestions = 2;
-var wrongAnswers = 4;
+var skippedQuestions = 0;
+var wrongAnswers = 0;
 var clockTimer;
 var answer = 0;
 var data = {};
@@ -110,9 +110,15 @@ function timerFunction(){
         $(".timer").removeAttr("style");
         clearInterval(clockTimer);
         correctAnswerF();
-        if(totalQuestions < 30){
+        if(totalQuestions==5){
+            skippedQuestions++;
+        }
+        if(totalQuestions < 5){
             skippedQuestions++;
             questionUpdate();
+        }
+        else{
+            results();
         }
     }
 }
@@ -135,9 +141,15 @@ function questionUpdate(){
 
 buttonRefresh.addEventListener("click", function(){
     correctAnswerF();
-    if(totalQuestions < 30){
+    if(totalQuestions==5){
+        skippedQuestions++;
+    }
+    if(totalQuestions < 5){
         skippedQuestions++;
         questionUpdate();
+    }
+    else{
+        results();
     }
 });
 
@@ -146,15 +158,18 @@ option1.addEventListener("click", function(){
         clickedAnswer =0;
         clearInterval(clockTimer);
         seconds = 0;
-        if(totalQuestions < 30){
-            questionUpdate();
-        }
         correctAnswerF();
         if(answer==0){
             correctAnswers++;
         }
         else{
             wrongAnswerF("#option0");
+        }
+        if(totalQuestions < 5){
+            questionUpdate();
+        }
+        else{
+            results();
         }
     }
 })
@@ -165,14 +180,17 @@ option2.addEventListener("click", function(){
         clearInterval(clockTimer);
         seconds = 0;
         correctAnswerF();
-        if(totalQuestions < 30){
-            questionUpdate();
-        }
         if(answer==1){
             correctAnswers++;
         }
         else{
             wrongAnswerF("#option1");
+        }
+        if(totalQuestions < 5){
+            questionUpdate();
+        }
+        else{
+            results();
         }
     }
 })
@@ -182,15 +200,18 @@ option3.addEventListener("click", function(){
         clickedAnswer =2;
         clearInterval(clockTimer);
         seconds = 0;
-        if(totalQuestions < 30){
-            questionUpdate();
-        }
         correctAnswerF();
         if(answer==2){
             correctAnswers++;
         }
         else{
             wrongAnswerF("#option2");
+        }
+        if(totalQuestions < 5){
+            questionUpdate();
+        }
+        else{
+            results();
         }
     }
 })
@@ -201,14 +222,17 @@ option4.addEventListener("click", function(){
         clearInterval(clockTimer);
         seconds = 0;
         correctAnswerF();
-        if(totalQuestions < 30){
-            questionUpdate();
-        }
         if(answer==3){
             correctAnswers++;
         }
         else{
             wrongAnswerF("#option3");
+        }
+        if(totalQuestions < 5){
+            questionUpdate();
+        }
+        else{
+            results();
         }
     }
 })
@@ -222,10 +246,12 @@ function results(){
     $(".wrongAnswers").html(wrongAnswers);
     clearInterval(clockTimer);
     showChart();
-    $(".questionContainer").slideUp(1000);
     setTimeout(function(){
-        $(".chart").slideDown(1000);
-    }, 1000);
+        $(".questionContainer").slideUp(1000);
+        setTimeout(function(){
+            $(".chart").slideDown(1000);
+        }, 1000);
+    }, 3000);
 }
 
 
