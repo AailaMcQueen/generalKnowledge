@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 
 *{
     padding: 0;
@@ -167,9 +174,12 @@ ol li:hover{
 
 .chart{
     padding-top: 15vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     background-color: inherit;
-    justify-content: space-around;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
 }
 
 .chart .h1{
@@ -189,6 +199,8 @@ ol li:hover{
     outline: none;
     border: none;
     font-size: 1.5em;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
     display: inline-flex;
     vertical-align: middle;
     line-height: 1;
@@ -233,7 +245,10 @@ ol li:hover{
 
     .chart{
         margin-left: 25px;
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
     }
 }
 

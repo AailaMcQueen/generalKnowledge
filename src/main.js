@@ -22,11 +22,13 @@ var skippedQuestions = 0;
 var wrongAnswers = 0;
 var clockTimer;
 var answer = 0;
+var result = true;
 var data = {};
 
 initiate();
 
 function initiate(){
+    result = false;
     fetchData();
     setTimeout(function(){
         questionDataInput();
@@ -96,6 +98,7 @@ function dataInput(){
 }
 
 $(".stopButton button").click(function(){
+    clearInterval(clockTimer);
     if(seconds > 0){
         skippedQuestions = skippedQuestions + 31 - totalQuestions;
     }
@@ -116,7 +119,7 @@ function timerFunction(){
         $(".timer").removeAttr("style");
         clearInterval(clockTimer);
         correctAnswerF();
-        if(totalQuestions==5){
+        if(totalQuestions==30){
             skippedQuestions++;
         }
         if(totalQuestions < 30){
@@ -140,6 +143,7 @@ function questionUpdate(){
             questionDataInput();
             $(".questionContainer").slideDown(1000);
             totalQuestions++;
+            clearInterval(clockTimer);
             seconds = 46;
             clockTimer = setInterval(timerFunction, 1000);
         }, 1500);
@@ -147,15 +151,7 @@ function questionUpdate(){
 }
 
 buttonRefresh.addEventListener("click", function(){
-    correctAnswerF();
-    if(totalQuestions==30){
-        skippedQuestions++;
-    }
-    if(totalQuestions < 30){
-        skippedQuestions++;
-        questionUpdate();
-    }
-    if(skippedQuestions+wrongAnswers+correctAnswers >= 30){
+    if(result === true){
         totalQuestions = 0;
         skippedQuestions = 0;
         correctAnswers = 0;
@@ -170,6 +166,16 @@ buttonRefresh.addEventListener("click", function(){
             }, 1000);
             initiate();
         }, 3000);
+    }
+    clearInterval(clockTimer);
+    correctAnswerF();
+    if(totalQuestions==30){
+        skippedQuestions++;
+        results();
+    }
+    if(totalQuestions < 30){
+        skippedQuestions++;
+        questionUpdate();
     }
 });
 
@@ -259,6 +265,8 @@ option4.addEventListener("click", function(){
 
 
 function results(){
+    result = true;
+    clearInterval(clockTimer);
     totalQuestions = 30;
     seconds = 0;
     timerX.innerHTML = "00";
