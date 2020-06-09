@@ -1,6 +1,9 @@
 var url = "https://opentdb.com/api.php?amount=1&type=multiple";
+var url2 = "https://opentdb.com/api_token.php?command=request";
+var url3 = "https://opentdb.com/api_token.php?command=reset";
 var buttonRefresh = document.querySelector(".buttonRefresh");
-var questionArray = [];
+var addOn = "&category="
+var categoryArray = ["9", "10", "17", "18", "19", "20", "21", "22", "23", "24", "25", "30"];
 var questionDiv = document.querySelectorAll(".questionCard");
 var timerX = document.querySelector(".seconds");
 var timerY = document.querySelector(".timer");
@@ -24,8 +27,45 @@ var clockTimer;
 var answer = 0;
 var result = true;
 var data = {};
+var token = "&token=";
 
 initiate();
+function fetchToken(){
+    fetch(url2)
+    .then(function(request){
+        if(!request.ok){
+            throw Error(request.status);
+        }
+        return request.json();
+    })
+    .then(function(response){
+        token = token + response.token;
+        url = url + token;
+    })
+    .catch(function(error){
+        alert(error);
+    });
+}
+
+function resetToken(){
+    url3 = url3 + token;
+    token = "&token=";
+    fetch(url3)
+    .then(function(request){
+        if(!request.ok){
+            throw Error(request.status);
+        }
+        return request.json();
+    })
+    .then(function(response){
+        token = token + response.token;
+        url = url + token;
+    })
+    .catch(function(error){
+        alert(error);
+    });
+}
+
 
 function initiate(){
     result = false;
@@ -63,6 +103,10 @@ function questionDataInput(){
 
 
 function fetchData(){
+    var typical = Math.random()*20;
+    typical = Math.floor(typical);
+    typical = typical % 12;
+    url = url + addOn + categoryArray[typical];
     fetch(url)
     .then(function(request){
         if(!request.ok){
@@ -71,7 +115,12 @@ function fetchData(){
         return request.json();
     })
     .then(function(response){
-        data = response.results[0];
+        if(response.response_code == 4){
+            resetToken();
+            fetchData();
+        }
+        else
+            data = response.results[0];
     })
     .catch(function(error){
         alert(error);
